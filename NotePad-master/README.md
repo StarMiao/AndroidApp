@@ -279,6 +279,7 @@ String[] dataColumns = { NotePad.Notes.COLUMN_NAME_TITLE, NotePad.Notes.COLUMN_N
 int[] viewIDs = { android.R.id.text1, R.id.text2 };
 ```
 运行结果
+![image](https://user-images.githubusercontent.com/57957504/119346106-5d52f480-bccc-11eb-885f-91dccf7be36c.png)
 
 ### 功能二:添加查询功能
 1. 添加图标
@@ -366,3 +367,4 @@ protected void onCreate(Bundle savedInstanceState) {
 ```
 
 运行结果
+![image](https://user-images.githubusercontent.com/57957504/119346081-5330f600-bccc-11eb-99fe-6c3665d7d271.png)
