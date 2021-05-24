@@ -94,7 +94,7 @@ public Uri insert(Uri uri, ContentValues initialValues) {
     }
 ```
 
-以上代码中我们应该对12-18行进行修改，将系统默认的时间now进行格式化，改进后的代码如下：
+2.以上代码中对12-18行进行修改，将系统默认的时间now进行格式化，改进后的代码如下：
 
 		//系统默认显示的时间使用毫秒数进行表示，很难阅读
 		Long now = Long.valueOf(System.currentTimeMillis());
@@ -110,7 +110,7 @@ public Uri insert(Uri uri, ContentValues initialValues) {
             values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, dateFormat);
         }
 
-updateNote():
+updateNote()中:
 
 ```
 private final void updateNote(String text, String title) {
@@ -141,7 +141,7 @@ private final void updateNote(String text, String title) {
     }
  ```
  
-第三行代码添加默认的毫秒数时间格式，我们对其进行时间的格式化，改进后代码如下:
+3. 第三行代码添加默认的毫秒数时间格式，我们对其进行时间的格式化，改进后代码如下:
 ```
     private final void updateNote(String text, String title) {
         ContentValues values = new ContentValues();
@@ -176,7 +176,7 @@ private final void updateNote(String text, String title) {
             );
     }
  ```
-将获取到的时间进行赋值操作
+4. 将获取到的时间进行赋值操作
 观察源码我们可以发现，在SQLite中已经定义过时间变量了我们就没有必要进行修改，代码如下：
 ```
        public void onCreate(SQLiteDatabase db) {
@@ -198,7 +198,7 @@ if (values.containsKey(NotePad.Notes.COLUMN_NAME_CREATE_DATE) == false) {
             values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, dateFormat);
         }
 ```
-接下来我们找到创建Note时的源码：
+5. 接下来我们找到创建Note时的源码：
 ```
 public class NotesList extends ListActivity {
     private static final String TAG = "NotesList";
@@ -237,7 +237,7 @@ public class NotesList extends ListActivity {
     }
 ```
 
-查看源码可以发现，他只是显示id以及titile，并没有时间，我们加上时间的显示，cursor就会将新增的时间一并检索，而后装载相应数据列，我们一并将其修改并显示时间戳。
+6. 查看源码可以发现，他只是显示id以及titile，并没有时间，我们加上时间的显示，cursor就会将新增的时间一并检索，而后装载相应数据列，我们一并将其修改并显示时间戳。
 
 ```
 private static final String[] PROJECTION = new String[] {
@@ -281,7 +281,7 @@ int[] viewIDs = { android.R.id.text1, R.id.text2 };
 运行结果
 
 ### 功能二:添加查询功能
-添加图标
+1. 添加图标
 我们在顶部的菜单栏添加一个查询的图标，找到list_option_menu.xml，添加代码如下：
 ```
     <item
@@ -302,7 +302,7 @@ case R.id.menu_search:
                 return true;
 ```
 
-新建一个用于查找功能实现以及布局的Activity
+2. 新建一个用于查找功能实现以及布局的Activity
 新建Activity：NoteSearch以及它的布局文件note_search.xml
 编辑布局文件，代码如下：
 
@@ -325,7 +325,7 @@ case R.id.menu_search:
     </ListView>
 </LinearLayout>
 ```
-在NoteSeach中查找功能的实现，代码如下:
+3. 在NoteSeach中查找功能的实现，代码如下:
 
 ```
 public boolean onQueryTextChange(String newText) {    
@@ -345,7 +345,7 @@ public boolean onQueryTextChange(String newText) {
 }
 ```
 
-显示以及获取代码的实现：
+4. 显示以及获取代码的实现：
 
 ```
 ListView listview;
